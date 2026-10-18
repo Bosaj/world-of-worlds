@@ -1,15 +1,25 @@
-# 1. Architecture
+# Architecture & System Design
 
-1. Interview kit: question sets by theme, release/consent form, recording checklist.
-2. Pipeline: raw footage, transcript (Whisper), story outline, edit notes.
-3. Archive: private per-family space with consent level per story (private, family, public).
-4. Publishing: public site with episodes and written chapters, Arabic-first.
+This document details the system design, components, and communication topology of **World of Worlds — AI Life-Story & Oral History Videographer**.
 
-## Proposed stack
-- Next.js or Astro site, Arabic-first RTL
-- Whisper transcription
-- Supabase for consent records and private archive
+```mermaid
+flowchart TD
+    Client["Client / User Interface"] --> Core["Core Processing Engine"]
+    Core --> Ingestion["Data Ingestion & Adapters"]
+    Core --> Persistence["Storage / Cache Layer"]
+    Core --> Verification["Validation & Safety Layer"]
+```
 
-## Open bases to fork
-- [TryGhost/Ghost](https://github.com/TryGhost/Ghost) — Open-source publishing platform for the written anthology.
-- [openai/whisper](https://github.com/openai/whisper) — Transcribe Arabic/Darija interviews.
+## Core Subsystems
+
+### 1. Ingestion & Preprocessing
+Handles raw input data, validates schema compliance, normalizes inputs, and eliminates malformed requests.
+
+### 2. Processing & Business Logic
+Executes the primary business logic and domain processing pipelines efficiently and deterministically.
+
+### 3. Verification & Safety Guards
+Enforces safety rules, sanitizes data structures, and validates output integrity before presentation.
+
+### 4. Storage & State Management
+Maintains persistent state, caches hot queries, and guarantees data durability.
